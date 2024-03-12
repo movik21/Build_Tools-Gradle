@@ -38,14 +38,14 @@ public class App {
 
         PDPageContentStream contentStream = new PDPageContentStream(helloPdf, page);
         contentStream.beginText();
-        contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 10);
-        contentStream.newLineAtOffset(10, 100);
+        contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 36);
+        contentStream.newLineAtOffset(10, 600);
         contentStream.showText("Hello DevOps ZHAW BuildTools!!!");
         contentStream.endText();
         contentStream.close();
 
-        helloPdf.save(new File("myfirstfile.pdf"));
-        helloPdf.close();          
+        helloPdf.save(new File("mysecondfile.pdf"));
+        helloPdf.close();   
         
         // Pseudo Code
 		IRender render = new Render();
