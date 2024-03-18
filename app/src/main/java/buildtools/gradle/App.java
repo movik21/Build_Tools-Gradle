@@ -3,8 +3,9 @@
  */
 package buildtools.gradle;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -30,6 +31,30 @@ public class App {
      */
     public static void main(String[] args) throws IOException {
         
+        // Start Calculator
+        try {
+            String jarFileName = "calculator-1.2.jar"; // The name of the jar file
+            ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", jarFileName);
+            
+            // Start the process
+            Process process = processBuilder.start();
+            
+            // If you want to capture and print the output of the jar application
+            new Thread(() -> {
+                BufferedReader input = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                input.lines().forEach(System.out::println);
+            }).start();
+            
+            // Wait for the process to exit and print its exit code
+            int exitCode = process.waitFor();
+            System.out.println("Exited with code: " + exitCode);
+            
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }  
+        // Workaround: Navigate to the folder of gradle cache and start the calculator by "java -jar calculator-1.2.jar"
+        // "C:\Users\USERNAME\.gradle\caches\modules-2\files-2.1\com.github.javadev\calculator\1.2\d1736e40b418c209b147497cc6f457e3e300ee33" 
+
         // PDF Box
         // example code from https://carbonrider.github.io/pdfbox_tutorial/introduction.html
         PDDocument helloPdf = new PDDocument();
@@ -44,7 +69,7 @@ public class App {
         contentStream.endText();
         contentStream.close();
 
-        helloPdf.save(new File("mysecondfile.pdf"));
+        // helloPdf.save(new File("mysecondfile.pdf"));
         helloPdf.close();   
         
         // Pseudo Code

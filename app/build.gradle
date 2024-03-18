@@ -31,6 +31,9 @@ dependencies {
 
     // from https://pdfbox.apache.org/
     implementation 'org.apache.pdfbox:pdfbox-app:3.0.1'
+
+    // from https://github.com/javadev/calculator
+    implementation 'com.github.javadev:calculator:1.2'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
